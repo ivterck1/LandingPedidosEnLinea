@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Cangrejo Cevichero | Pedidos por WhatsApp</title>
+    <meta
+      name="description"
+      content="Interfaz temporal para El Cangrejo Cevichero, restaurante de mariscos frescos con pedidos por WhatsApp."
+    >
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/menu-data.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <!-- Encabezado principal y navegacion simple -->
+    <header class="site-header">
+      <nav class="main-nav" aria-label="Navegacion principal">
+        <a class="brand" href="#inicio" aria-label="Inicio de El Cangrejo Cevichero">
+          <span class="brand-mark">CC</span>
+          <span>El Cangrejo Cevichero</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#carrito">Carrito</a></li>
+          <li><a href="#pedido">Pedido</a></li>
+        </ul>
+
+        <a class="header-action" href="#pedido">Pedir ahora</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero temporal con espacio para imagen principal -->
+      <section class="hero" id="inicio">
+        <div class="hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">Contenido temporal</p>
+            <h1>Mariscos frescos con sabor al Caribe mexicano</h1>
+            <p>
+              Ceviches, tostadas y cocteles preparados al momento en un ambiente
+              casual, costero y moderno.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary-button" href="#menu">Ver menu</a>
+              <a class="button secondary-button" href="#pedido">Hacer pedido</a>
+            </div>
+          </div>
+
+          <div class="hero-image-placeholder" role="img" aria-label="Imagen temporal de mariscos frescos">
+            <span>Imagen principal temporal</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categorias visuales del menu -->
+      <section class="section categories-section" aria-labelledby="categories-title">
+        <div class="section-header">
+          <p class="eyebrow">Contenido temporal</p>
+          <h2 id="categories-title">Categorias</h2>
+          <p>Accesos visuales para organizar el menu del restaurante.</p>
+        </div>
+
+        <div class="category-list" aria-label="Categorias del menu">
+          <a href="#menu">Ceviches</a>
+          <a href="#menu">Tostadas</a>
+          <a href="#menu">Cocteles</a>
+          <a href="#menu">Especialidades</a>
+          <a href="#menu">Bebidas</a>
+        </div>
+      </section>
+
+      <!-- Tarjetas de platillos renderizadas desde JavaScript -->
+      <section class="section menu-section" id="menu" aria-labelledby="menu-title">
+        <div class="section-header">
+          <p class="eyebrow">Contenido temporal</p>
+          <h2 id="menu-title">Menu destacado</h2>
+          <p>
+            Platillos de ejemplo cargados desde el archivo de datos del menu.
+            La logica del carrito se agregara en una etapa posterior.
+          </p>
+        </div>
+
+        <div class="menu-grid" id="menu-grid" aria-label="Platillos temporales"></div>
+      </section>
+
+      <!-- Carrito funcional renderizado desde JavaScript -->
+      <section class="section cart-section" id="carrito" aria-labelledby="cart-title">
+        <div class="section-header">
+          <p class="eyebrow">Contenido temporal</p>
+          <h2 id="cart-title">Tu pedido</h2>
+          <p>Agrega platillos y ajusta cantidades sin recargar la p&aacute;gina.</p>
+        </div>
+
+        <aside class="cart-summary" aria-live="polite">
+          <p class="empty-cart" id="empty-cart">Tu carrito est&aacute; vac&iacute;o.</p>
+          <div class="cart-items" id="cart-items" aria-label="Productos en el carrito"></div>
+          <div class="cart-totals">
+            <div class="cart-line">
+              <span>Subtotal</span>
+              <strong id="cart-subtotal">$0.00</strong>
+            </div>
+            <div class="cart-total">
+              <span>Total</span>
+              <strong id="cart-total">$0.00</strong>
+            </div>
+          </div>
+          <button class="whatsapp-button" type="button" disabled>
+            Enviar por WhatsApp
+          </button>
+          <p class="order-message" id="order-message" aria-live="polite"></p>
+        </aside>
+      </section>
+
+      <!-- Formulario visual de datos del cliente -->
+      <section class="section order-section" id="pedido" aria-labelledby="order-title">
+        <div class="section-header">
+          <p class="eyebrow">Contenido temporal</p>
+          <h2 id="order-title">Datos del cliente</h2>
+          <p>
+            Campos preparados para validar el pedido en una etapa posterior.
+          </p>
+        </div>
+
+        <form class="order-form">
+          <label for="customer-name">Nombre</label>
+          <input
+            id="customer-name"
+            name="customerName"
+            type="text"
+            placeholder="Ej. Ana Lopez"
+          >
+
+          <fieldset>
+            <legend>Tipo de entrega</legend>
+            <label>
+              <input type="radio" name="deliveryType" value="domicilio">
+              Entrega a domicilio
+            </label>
+            <label>
+              <input type="radio" name="deliveryType" value="recoger">
+              Recoger en restaurante
+            </label>
+          </fieldset>
+
+          <label for="customer-address">Direcci&oacute;n</label>
+          <input
+            id="customer-address"
+            name="customerAddress"
+            type="text"
+            placeholder="Calle, numero, colonia y referencias"
+          >
+
+          <label for="order-notes">Notas del pedido</label>
+          <textarea
+            id="order-notes"
+            name="orderNotes"
+            rows="4"
+            placeholder="Ej. Sin cebolla, poca salsa, agregar lim&oacute;n..."
+          ></textarea>
+        </form>
+      </section>
+    </main>
+
+    <!-- Pie de pagina con informacion temporal del restaurante -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <section>
+          <h2>Horarios</h2>
+          <p>Lunes a domingo: 12:00 pm - 9:00 pm</p>
+        </section>
+        <section>
+          <h2>Telefono</h2>
+          <p><a href="tel:+520000000000">+52 000 000 0000</a></p>
+        </section>
+        <section>
+          <h2>Zona de entrega</h2>
+          <p>Zona centro y colonias cercanas. Informacion temporal.</p>
+        </section>
+        <section>
+          <h2>Redes sociales</h2>
+          <ul class="social-links">
+            <li><a href="#" aria-label="Instagram temporal">Instagram</a></li>
+            <li><a href="#" aria-label="Facebook temporal">Facebook</a></li>
+            <li><a href="#" aria-label="TikTok temporal">TikTok</a></li>
+          </ul>
+        </section>
+      </div>
+      <p class="footer-note">Contenido temporal - El Cangrejo Cevichero.</p>
+    </footer>
+  </body>
+</html>
