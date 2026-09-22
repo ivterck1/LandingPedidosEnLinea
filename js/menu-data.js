@@ -6,7 +6,7 @@ const menuItems = [
     descripcion: "Pescado fresco, lim\u00f3n, pepino, cebolla morada y mango.",
     precio: 145,
     categoria: "Ceviches",
-    imagen: "image-ceviche",
+    imagen: "assets/images/products/ceviche-acapulco.png",
     disponible: true,
   },
   {
@@ -15,7 +15,7 @@ const menuItems = [
     descripcion: "Camaron, pescado, pulpo, cilantro y salsa de la casa.",
     precio: 172,
     categoria: "Ceviches",
-    imagen: "image-ceviche",
+    imagen: "assets/images/products/ceviche-acapulco.png",
     disponible: true,
   },
   {
@@ -24,7 +24,7 @@ const menuItems = [
     descripcion: "Pescado en lim\u00f3n con aguacate, pepino y chile serrano.",
     precio: 158,
     categoria: "Ceviches",
-    imagen: "image-ceviche",
+    imagen: "assets/images/products/ceviche-acapulco.png",
     disponible: true,
   },
   {
@@ -33,7 +33,7 @@ const menuItems = [
     descripcion: "Atun sellado, aguacate, ajonjoli y salsa citrica.",
     precio: 98,
     categoria: "Tostadas",
-    imagen: "image-tostada",
+    imagen: "assets/images/products/tostada-pulpo.png",
     disponible: true,
   },
   {
@@ -42,7 +42,7 @@ const menuItems = [
     descripcion: "Camaron fresco, pico de gallo, aguacate y mayonesa ligera.",
     precio: 92,
     categoria: "Tostadas",
-    imagen: "image-tostada",
+    imagen: "assets/images/products/tostada-pulpo.png",
     disponible: true,
   },
   {
@@ -51,7 +51,7 @@ const menuItems = [
     descripcion: "Pulpo marinado, chile tatemado, cebolla morada y cilantro.",
     precio: 115,
     categoria: "Tostadas",
-    imagen: "image-tostada",
+    imagen: "assets/images/products/tostada-pulpo.png",
     disponible: true,
   },
   {
@@ -60,7 +60,7 @@ const menuItems = [
     descripcion: "Camaron, jitomate, cilantro, aguacate y salsa coctelera.",
     precio: 165,
     categoria: "Cocteles",
-    imagen: "image-coctel",
+    imagen: "assets/images/products/coctel-camaron.png",
     disponible: true,
   },
   {
@@ -69,7 +69,7 @@ const menuItems = [
     descripcion: "Mezcla de mariscos, jugo coctelero, aguacate y lim\u00f3n.",
     precio: 195,
     categoria: "Cocteles",
-    imagen: "image-coctel",
+    imagen: "assets/images/products/coctel-camaron.png",
     disponible: true,
   },
   {
@@ -78,7 +78,7 @@ const menuItems = [
     descripcion: "Camaron fresco, chile serrano, lim\u00f3n, pepino y cebolla.",
     precio: 178,
     categoria: "Especialidades",
-    imagen: "image-especial",
+    imagen: "assets/images/products/tacos-gobernador.png",
     disponible: true,
   },
   {
@@ -87,7 +87,7 @@ const menuItems = [
     descripcion: "Pescado crujiente, col morada, crema de chipotle y lim\u00f3n.",
     precio: 132,
     categoria: "Especialidades",
-    imagen: "image-especial",
+    imagen: "assets/images/products/tacos-gobernador.png",
     disponible: true,
   },
   {
@@ -96,7 +96,7 @@ const menuItems = [
     descripcion: "Arroz con camaron, pulpo, vegetales y especias costeras.",
     precio: 185,
     categoria: "Especialidades",
-    imagen: "image-especial",
+    imagen: "assets/images/products/guacamole-costero.png",
     disponible: true,
   },
   {
@@ -105,7 +105,7 @@ const menuItems = [
     descripcion: "Agua fresca de lim\u00f3n con hierbabuena y hielo.",
     precio: 38,
     categoria: "Bebidas",
-    imagen: "image-bebida",
+    imagen: "assets/images/products/agua-jamaica.png",
     disponible: true,
   },
   {
@@ -114,7 +114,7 @@ const menuItems = [
     descripcion: "Infusi\u00f3n de jamaica servida fr\u00eda con toque c\u00edtrico.",
     precio: 38,
     categoria: "Bebidas",
-    imagen: "image-bebida",
+    imagen: "assets/images/products/agua-jamaica.png",
     disponible: true,
   },
   {
@@ -123,7 +123,7 @@ const menuItems = [
     descripcion: "Infusi\u00f3n de lim\u00f3n y pepino servida fr\u00eda con toque de ch\u00eda.",
     precio: 38,
     categoria: "Bebidas",
-    imagen: "image-bebida",
+    imagen: "assets/images/products/agua-jamaica.png",
     disponible: true,
   },
   {
@@ -132,7 +132,7 @@ const menuItems = [
     descripcion: "Refresco fr\u00edo de lata para acompa\u00f1ar tus mariscos.",
     precio: 32,
     categoria: "Bebidas",
-    imagen: "image-bebida",
+    imagen: "assets/images/products/agua-jamaica.png",
     disponible: true,
   },
 ];

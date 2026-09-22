@@ -5,6 +5,14 @@ const cartSubtotalElement = document.querySelector("#cart-subtotal");
 const cartTotalElement = document.querySelector("#cart-total");
 const whatsappButton = document.querySelector(".whatsapp-button");
 const orderMessageElement = document.querySelector("#order-message");
+const headerCartCountElement = document.querySelector("#header-cart-count");
+const mobileOrderBar = document.querySelector("#mobile-order-bar");
+const mobileOrderToggle = document.querySelector("#mobile-order-toggle");
+const mobileOrderClose = document.querySelector("#mobile-order-close");
+const mobilePanelBackdrop = document.querySelector("#mobile-panel-backdrop");
+const mobileOrderCountElement = document.querySelector("#mobile-order-count");
+const mobileOrderTotalElement = document.querySelector("#mobile-order-total");
+const mobilePanelLinks = document.querySelectorAll('a[href="#pedido"], a[href="#carrito"]');
 const CANGREJO_CART_STORAGE_KEY = "cangrejoCevicheroCart";
 // Sustituir por el numero real con codigo de pais, sin +, espacios ni guiones.
 const RESTAURANT_WHATSAPP_NUMBER = "525531148654";
@@ -29,6 +37,16 @@ function findProductById(productId) {
 // Busca un producto que ya esta dentro del carrito.
 function findCartItemById(productId) {
   return cartItems.find((item) => item.id === productId);
+}
+
+// Cuenta todas las unidades agregadas al carrito.
+function getCartItemCount() {
+  return cartItems.reduce((total, item) => total + item.quantity, 0);
+}
+
+// Obtiene la imagen real asociada a un producto.
+function getProductImageSrc(product) {
+  return product && product.imagen ? product.imagen : "assets/images/products/ceviche-acapulco.png";
 }
 
 // Lee y limpia los datos actuales del formulario del cliente.
@@ -156,9 +174,13 @@ function createMenuCard(product) {
   card.className = "menu-card";
 
   const image = document.createElement("div");
-  image.className = `dish-image ${product.imagen}`;
-  image.setAttribute("role", "img");
-  image.setAttribute("aria-label", `Imagen temporal de ${product.nombre}`);
+  image.className = "dish-image";
+
+  const imageElement = document.createElement("img");
+  imageElement.src = getProductImageSrc(product);
+  imageElement.alt = product.nombre;
+  imageElement.loading = "lazy";
+  image.append(imageElement);
 
   const content = document.createElement("div");
   content.className = "dish-content";
@@ -403,6 +425,33 @@ function updateWhatsAppButtonState() {
   whatsappButton.disabled = cartItems.length === 0;
 }
 
+// Sincroniza contador del header y barra inferior movil con el carrito actual.
+function updateOrderIndicators() {
+  const itemCount = getCartItemCount();
+  const subtotal = calculateCartSubtotal();
+  const itemLabel = itemCount === 1 ? "1 producto" : `${itemCount} productos`;
+
+  if (headerCartCountElement) {
+    headerCartCountElement.textContent = itemCount;
+  }
+
+  if (mobileOrderCountElement) {
+    mobileOrderCountElement.textContent = itemLabel;
+  }
+
+  if (mobileOrderTotalElement) {
+    mobileOrderTotalElement.textContent = formatPrice(subtotal);
+  }
+
+  if (mobileOrderBar) {
+    mobileOrderBar.hidden = itemCount === 0;
+  }
+
+  if (itemCount === 0) {
+    closeMobileOrderPanel();
+  }
+}
+
 // Crea la parte informativa de un producto en el carrito.
 function createCartItemInfo(item) {
   const subtotal = item.price * item.quantity;
@@ -422,6 +471,18 @@ function createCartItemInfo(item) {
   info.append(title, unitPrice, subtotalText);
 
   return info;
+}
+
+// Crea una miniatura del producto para reforzar la lectura visual del pedido.
+function createCartItemThumbnail(item) {
+  const product = findProductById(item.id);
+  const thumbnail = document.createElement("img");
+  thumbnail.className = "cart-item-image";
+  thumbnail.src = getProductImageSrc(product);
+  thumbnail.alt = "";
+  thumbnail.loading = "lazy";
+
+  return thumbnail;
 }
 
 // Crea un boton del carrito con accion y etiqueta accesible.
@@ -484,11 +545,15 @@ function createCartItemElement(item) {
   const cartItem = document.createElement("article");
   cartItem.className = "cart-item";
 
+  const details = document.createElement("div");
+  details.className = "cart-item-details";
+  details.append(createCartItemThumbnail(item), createCartItemInfo(item));
+
   const actions = document.createElement("div");
   actions.className = "cart-item-actions";
   actions.append(createQuantityControls(item), createRemoveButton(item));
 
-  cartItem.append(createCartItemInfo(item), actions);
+  cartItem.append(details, actions);
 
   return cartItem;
 }
@@ -514,6 +579,7 @@ function renderCart() {
   cartSubtotalElement.textContent = formatPrice(subtotal);
   cartTotalElement.textContent = formatPrice(subtotal);
   updateWhatsAppButtonState();
+  updateOrderIndicators();
 }
 
 // Atiende clicks en botones "Agregar" del menu usando delegacion de eventos.
@@ -571,6 +637,26 @@ function handleWhatsAppClick() {
   window.open(whatsappUrl, "_blank");
 }
 
+// Abre el panel movil del pedido sin alterar el carrito.
+function openMobileOrderPanel() {
+  document.body.classList.add("order-panel-open");
+}
+
+// Cierra el panel movil del pedido conservando productos y formulario.
+function closeMobileOrderPanel() {
+  document.body.classList.remove("order-panel-open");
+}
+
+// Abre el panel movil desde la barra inferior o accesos al pedido.
+function handleMobilePanelRequest(event) {
+  if (!window.matchMedia("(max-width: 767px)").matches) {
+    return;
+  }
+
+  event.preventDefault();
+  openMobileOrderPanel();
+}
+
 // Inicia la interfaz solo si existen los contenedores necesarios.
 function initializeApp() {
   if (!menuGrid || !cartItemsContainer || !whatsappButton) {
@@ -584,6 +670,22 @@ function initializeApp() {
   menuGrid.addEventListener("click", handleMenuClick);
   cartItemsContainer.addEventListener("click", handleCartClick);
   whatsappButton.addEventListener("click", handleWhatsAppClick);
+
+  if (mobileOrderToggle) {
+    mobileOrderToggle.addEventListener("click", openMobileOrderPanel);
+  }
+
+  if (mobileOrderClose) {
+    mobileOrderClose.addEventListener("click", closeMobileOrderPanel);
+  }
+
+  if (mobilePanelBackdrop) {
+    mobilePanelBackdrop.addEventListener("click", closeMobileOrderPanel);
+  }
+
+  mobilePanelLinks.forEach((link) => {
+    link.addEventListener("click", handleMobilePanelRequest);
+  });
 
   console.log("Carrito listo para agregar productos.");
 }
