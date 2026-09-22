@@ -161,13 +161,13 @@
               <span aria-hidden="true"></span>
             </div>
 
-            <div class="category-list" aria-label="Categorias del menu">
-              <a class="is-active" href="#menu">Especialidades</a>
-              <a href="#menu">Ceviches</a>
-              <a href="#menu">Tostadas</a>
-              <a href="#menu">Cocteles</a>
-              <a href="#menu">Complementos</a>
-              <a href="#menu">Bebidas</a>
+            <div class="category-list" role="group" aria-label="Categorias del menu">
+              <button class="is-active" type="button" data-category="Especialidades" aria-controls="menu-grid" aria-pressed="true">Especialidades</button>
+              <button type="button" data-category="Ceviches" aria-controls="menu-grid" aria-pressed="false">Ceviches</button>
+              <button type="button" data-category="Tostadas" aria-controls="menu-grid" aria-pressed="false">Tostadas</button>
+              <button type="button" data-category="Cocteles" aria-controls="menu-grid" aria-pressed="false">Cocteles</button>
+              <button type="button" data-category="Complementos" aria-controls="menu-grid" aria-pressed="false">Complementos</button>
+              <button type="button" data-category="Bebidas" aria-controls="menu-grid" aria-pressed="false">Bebidas</button>
             </div>
 
             <div class="menu-grid" id="menu-grid" aria-label="Platillos disponibles"></div>

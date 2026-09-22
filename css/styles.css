@@ -547,7 +547,7 @@ textarea:focus-visible {
   scrollbar-width: thin;
 }
 
-.category-list a {
+.category-list button {
   display: inline-flex;
   flex: 0 0 auto;
   min-height: 54px;
@@ -563,10 +563,11 @@ textarea:focus-visible {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
-.category-list a.is-active,
-.category-list a:hover {
+.category-list button.is-active,
+.category-list button:hover {
   color: var(--color-white);
   background: var(--color-orange);
 }

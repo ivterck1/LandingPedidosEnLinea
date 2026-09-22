@@ -1,4 +1,5 @@
 const menuGrid = document.querySelector("#menu-grid");
+const categoryList = document.querySelector(".category-list");
 const cartItemsContainer = document.querySelector("#cart-items");
 const emptyCartMessage = document.querySelector("#empty-cart");
 const cartSubtotalElement = document.querySelector("#cart-subtotal");
@@ -216,7 +217,7 @@ function createMenuCard(product) {
   return card;
 }
 
-// Pinta todos los productos disponibles dentro del contenedor del menu.
+// Pinta los productos disponibles o informa cuando la categoria esta vacia.
 function renderMenu(products) {
   if (!menuGrid) {
     return;
@@ -224,11 +225,46 @@ function renderMenu(products) {
 
   menuGrid.innerHTML = "";
 
-  products
-    .filter((product) => product.disponible)
-    .forEach((product) => {
-      menuGrid.append(createMenuCard(product));
-    });
+  const availableProducts = products.filter((product) => product.disponible);
+
+  if (availableProducts.length === 0) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.setAttribute("role", "status");
+    emptyMessage.textContent = "No hay productos disponibles en esta categoría.";
+    menuGrid.append(emptyMessage);
+    return;
+  }
+
+  availableProducts.forEach((product) => {
+    menuGrid.append(createMenuCard(product));
+  });
+}
+
+// Compara categorias sin depender de espacios accidentales en los datos.
+function getProductsByCategory(category) {
+  return menuItems.filter((product) => product.categoria.trim() === category.trim());
+}
+
+// Sincroniza la categoria seleccionada y muestra solo sus productos.
+function selectCategory(category) {
+  categoryList.querySelectorAll("button[data-category]").forEach((button) => {
+    const isActive = button.dataset.category === category;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  renderMenu(getProductsByCategory(category));
+}
+
+// Atiende la seleccion con mouse o teclado mediante botones nativos.
+function handleCategoryClick(event) {
+  const button = event.target.closest("button[data-category]");
+
+  if (!button || !categoryList.contains(button)) {
+    return;
+  }
+
+  selectCategory(button.dataset.category);
 }
 
 // Agrega un producto nuevo al carrito o aumenta su cantidad si ya existe.
@@ -659,15 +695,16 @@ function handleMobilePanelRequest(event) {
 
 // Inicia la interfaz solo si existen los contenedores necesarios.
 function initializeApp() {
-  if (!menuGrid || !cartItemsContainer || !whatsappButton) {
+  if (!menuGrid || !categoryList || !cartItemsContainer || !whatsappButton) {
     return;
   }
 
-  renderMenu(menuItems);
+  selectCategory("Especialidades");
   restoreCartItems(loadCartFromStorage());
   renderCart();
 
   menuGrid.addEventListener("click", handleMenuClick);
+  categoryList.addEventListener("click", handleCategoryClick);
   cartItemsContainer.addEventListener("click", handleCartClick);
   whatsappButton.addEventListener("click", handleWhatsAppClick);
 
