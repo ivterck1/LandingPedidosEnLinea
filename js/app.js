@@ -47,7 +47,12 @@ function getCartItemCount() {
 
 // Obtiene la imagen real asociada a un producto.
 function getProductImageSrc(product) {
-  return product && product.imagen ? product.imagen : "assets/images/products/ceviche-acapulco.png";
+  return product && product.imagen ? product.imagen : "assets/images/products/ceviche-acapulco.webp";
+}
+
+// Presenta las categorias con ortografia correcta sin cambiar sus valores internos.
+function formatCategoryLabel(category) {
+  return category === "Cocteles" ? "Cócteles" : category;
 }
 
 // Lee y limpia los datos actuales del formulario del cliente.
@@ -188,7 +193,7 @@ function createMenuCard(product) {
 
   const category = document.createElement("p");
   category.className = "dish-category";
-  category.textContent = product.categoria;
+  category.textContent = formatCategoryLabel(product.categoria);
 
   const title = document.createElement("h3");
   title.textContent = product.nombre;
@@ -354,16 +359,16 @@ function validateCartForOrder() {
     const product = findProductById(item.id);
 
     if (!product || !product.disponible) {
-      errors.push(`El producto "${item.name}" ya no esta disponible.`);
+      errors.push(`El producto "${item.name}" ya no está disponible.`);
       return;
     }
 
     if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
-      errors.push(`La cantidad de "${item.name}" no es valida.`);
+      errors.push(`La cantidad de "${item.name}" no es válida.`);
     }
 
     if (typeof item.price !== "number" || item.price < 0) {
-      errors.push(`El precio de "${item.name}" no es valido.`);
+      errors.push(`El precio de "${item.name}" no es válido.`);
     }
   });
 
@@ -383,7 +388,7 @@ function validateCustomerData(customerData) {
   }
 
   if (customerData.deliveryType === "domicilio" && !customerData.address) {
-    errors.push("Escribe la direccion para entrega a domicilio.");
+    errors.push("Escribe la dirección para entrega a domicilio.");
   }
 
   return errors;
@@ -397,7 +402,7 @@ function validateOrder(customerData) {
   ];
 
   if (!/^\d+$/.test(RESTAURANT_WHATSAPP_NUMBER)) {
-    errors.push("El numero de WhatsApp del restaurante no esta configurado correctamente.");
+    errors.push("El número de WhatsApp del restaurante no está configurado correctamente.");
   }
 
   return errors;
@@ -435,7 +440,7 @@ function buildWhatsAppMessage(customerData) {
   ];
 
   if (customerData.deliveryType === "domicilio") {
-    messageLines.push(`Direccion: ${customerData.address}`);
+    messageLines.push(`Dirección: ${customerData.address}`);
   }
 
   if (customerData.notes) {
@@ -669,7 +674,7 @@ function handleWhatsAppClick() {
   const message = buildWhatsAppMessage(customerData);
   const whatsappUrl = createWhatsAppUrl(message);
 
-  showOrderMessage("Pedido listo. Se abrira WhatsApp para confirmar el envio.", "success");
+  showOrderMessage("Pedido listo. Se abrirá WhatsApp para confirmar el envío.", "success");
   window.open(whatsappUrl, "_blank");
 }
 

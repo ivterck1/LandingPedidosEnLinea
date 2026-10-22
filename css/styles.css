@@ -217,7 +217,7 @@ textarea:focus-visible {
   overflow: hidden;
   color: var(--color-white);
   margin-top: -1px;
-  --hero-main-image: url("../assets/images/products/ceviche-acapulco.png");
+  --hero-main-image: url("../assets/images/hero/hero-main.webp");
   background-color: var(--color-navy-deep);
   background-image:
     linear-gradient(90deg, rgba(3, 27, 45, 0.92) 0%, rgba(3, 27, 45, 0.82) 42%, rgba(3, 27, 45, 0.24) 68%, rgba(3, 27, 45, 0.02) 100%),
@@ -225,7 +225,6 @@ textarea:focus-visible {
     var(--hero-main-image);
   background-position: center top, center top, 74% center;
   background-size: cover, cover, cover;
-  /* Imagen definitiva esperada: ../assets/images/hero/hero-main.jpg */
 }
 
 .hero::before {
@@ -1046,8 +1045,8 @@ body.order-panel-open .mobile-panel-backdrop {
 
 @media (max-width: 767px) {
   .hero {
+    --hero-main-image: url("../assets/images/hero/hero-main-mobile.webp");
     background-position: center top, center top, 70% center;
-    /* Variante móvil esperada: ../assets/images/hero/hero-main-mobile.jpg */
   }
 
   .cart-panel {
